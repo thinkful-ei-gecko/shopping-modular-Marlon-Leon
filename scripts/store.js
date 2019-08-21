@@ -48,6 +48,18 @@ const store = (function(){
     console.log('spliced');
   };
 
+  const toggleCheckedFilter = function() {
+    console.log(`Before: ${this.hideCheckedItems}`);
+    this.hideCheckedItems = !this.hideCheckedItems;
+    console.log(`After: ${this.hideCheckedItems}`);
+  };
+
+  const setSearchTerm = function(prop) {
+    this.searchTerm = prop;
+  };
+
+
+
   return {
     items,
     hideCheckedItems,
@@ -56,7 +68,9 @@ const store = (function(){
     addItem,
     findAndToggleChecked,
     findAndUpdateName,
-    findAndDelete
+    findAndDelete,
+    toggleCheckedFilter,
+    setSearchTerm
   };
 
 }() );
