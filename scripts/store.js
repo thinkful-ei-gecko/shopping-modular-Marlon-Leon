@@ -10,8 +10,8 @@ const store = (function(){
   ];
   let hideCheckedItems = false;
   let searchTerm = '';
-  const findById = function(id){
-    return this.items.find(id => items.id === id);
+  const findById = function(id){ //returns the object that matches the ID
+    return this.items.find(item => item.id === id);
   };
   const addItem = function(name){
     try {
@@ -23,10 +23,12 @@ const store = (function(){
       console.error('Name not valid');
     }
   };
+
   const findAndToggleChecked = function(id){
-    let foundId = this.findById(id);
-    foundId.checked = !foundId.checked;
+    let obj = this.findById(id);
+    obj.checked = !obj.checked;
   };
+
   const findAndUpdateName = function(id, name){
     try{
       Item.validateName(name);
@@ -38,8 +40,12 @@ const store = (function(){
     }
   };
   const findAndDelete = function(id) {
-    let itemIndex = this.items.findIndex(id);
+    let obj = this.findById(id); //returns the object
+    let itemIndex = this.items.findIndex(item => item === obj);
+    // console.log(itemIndex);
+    // console.log(`test`);
     this.items.splice(itemIndex, 1);
+    console.log('spliced');
   };
 
   return {
@@ -50,7 +56,7 @@ const store = (function(){
     addItem,
     findAndToggleChecked,
     findAndUpdateName,
-    findAndDelete,
+    findAndDelete
   };
 
 }() );
